@@ -7,6 +7,8 @@ from data import common
 class NregDataset(data.Dataset):
     '''
     Read LR and HR images in train and eval phases.
+    https://www.codeleading.com/article/41225014893/
+    https://codeantenna.com/a/5tjtBYaQvH
     '''
 
     def name(self):
