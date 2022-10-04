@@ -1,0 +1,101 @@
+{
+  "mode": "sr",
+  "gpu_ids": [
+    0
+  ],
+  "scale": 4,
+  "is_train": true,
+  "rgb_range": 2047,
+  "save_image": true,
+  "datasets": {
+    "train": {
+      "mode": "Nreg",
+      "dataroot_HR": "./QB/Augment/train_HR_aug_npy",
+      "dataroot_LR": "./QB/Augment/train_LR_aug_npy",
+      "dataroot_PAN": "./QB/Augment/train_PAN_aug_npy",
+      "data_type": "npy",
+      "n_workers": 4,
+      "batch_size": 4,
+      "LR_size": 64,
+      "use_flip": true,
+      "use_rot": true,
+      "noise": ".",
+      "useContinueLearning": false,
+      "phase": "train",
+      "scale": 4,
+      "rgb_range": 2047
+    },
+    "val": {
+      "mode": "LRHR",
+      "dataroot_HR": "./QB/Augment_test/HR_npy",
+      "dataroot_LR": "./QB/Augment_test/LR_npy",
+      "dataroot_PAN": "./QB/Augment_test/PAN_npy",
+      "data_type": "npy",
+      "useContinueLearning": false,
+      "phase": "val",
+      "scale": 4,
+      "rgb_range": 2047
+    }
+  },
+  "networks": {
+    "which_model": "MPP",
+    "in_channels": 1,
+    "out_channels": 1,
+    "img_size": 4,
+    "num_heads": 4,
+    "n_feats": 256,
+    "linear_dim": 256,
+    "num_stage": 4,
+    "embed_dims": [
+      64,
+      128,
+      256,
+      512
+    ],
+    "num_paths": [
+      7,
+      4,
+      7,
+      7
+    ],
+    "mlp_ratio": 3,
+    "use_aggregate": true,
+    "feature_sum": true,
+    "scale": 4
+  },
+  "solver": {
+    "type": "ADAMW",
+    "learning_rate": 0.0001,
+    "weight_decay": 0,
+    "lr_scheme": "MultiStepLR",
+    "lr_steps": [
+      200,
+      400
+    ],
+    "lr_gamma": 0.5,
+    "loss_type": "pan_loss",
+    "spatial_loss": true,
+    "PerceptualLoss": true,
+    "manual_seed": 100,
+    "num_epochs": 800,
+    "skip_threshold": 3,
+    "split_batch": 1,
+    "save_ckp_step": 50,
+    "save_vis_step": 50,
+    "pretrain": null,
+    "pretrained_path": "./experiments/HYP_in4_x4/epochs/last_ckp.pth",
+    "cl_weights": [
+      0.1,
+      0.1,
+      0.4,
+      0.4
+    ]
+  },
+  "timestamp": "221004-173640",
+  "path": {
+    "exp_root": "experiments\\MPP_in1_x4",
+    "epochs": "experiments\\MPP_in1_x4\\epochs",
+    "visual": "experiments\\MPP_in1_x4\\visual",
+    "records": "experiments\\MPP_in1_x4\\records"
+  }
+}
